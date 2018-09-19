@@ -1,44 +1,42 @@
 $(document).ready(function() {
-    // Initialize Firebase
-  
-
 
   // Initialize Firebase
  
- var config = {
-    apiKey: "AIzaSyAjjgtPOD0KxwAmov0MYjkehxTY5XwadqA",
-    authDomain: "train-station-10828.firebaseapp.com",
-    databaseURL: "https://train-station-10828.firebaseio.com",
-    projectId: "train-station-10828",
-    storageBucket: "train-station-10828.appspot.com",
-    messagingSenderId: "473466966590"
+   // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAibvKCAI__GZScvDRzdgwGghxH60U3ZKE",
+    authDomain: "train-times-9b60d.firebaseapp.com",
+    databaseURL: "https://train-times-9b60d.firebaseio.com",
+    projectId: "train-times-9b60d",
+    storageBucket: "",
+    messagingSenderId: "821002420057"
   };
   firebase.initializeApp(config);
-
 
     var database = firebase.database();
     // Capture button Click
     $("#addTrain").on("click",function (event) {
         event.preventDefault();
 
-// values from text boxes
-var trainName = $("#trainName").val().trim();
-var destination = $("#destination").val().trim();
-var firstTrain = $("#firstTrain").val().trim();
-var freq  = $("#interval").val().trim();
+        // values from text boxes
+        var trainName = $("#trainName").val().trim();
+        var destination = $("#destination").val().trim();
+        var firstTrain = $("#firstTrain").val().trim();
+        var freq  = $("#interval").val().trim();
 
-// code for the push
-database.ref().push({
-    trainName: trainName,
-    destination: destination,
-    firstTrain: firstTrain,
-    frequency: freq
-});
+        // code for the push
+        database.ref().push({
+            trainName: trainName,
+            destination: destination,
+            firstTrain: firstTrain,
+            frequency: freq
+        });
     });
 
     // Firebase watcher + initial loader 
     database.ref().on("child_added", function (childSnapshot){
         var newTrain= childSnapshop.val().trainName;
+        console.log(newTrain);
         var newLocation = childSnapshot.val().destination;
         var newFirstTrain = childSnapshop.val().firstTrain;
         var newFreq = childSnapshot.val().frequency;
