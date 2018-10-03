@@ -3,15 +3,17 @@ $(document).ready(function() {
   // Initialize Firebase
  
    // Initialize Firebase
-  var config = {
+   // Initialize Firebase
+   var config = {
     apiKey: "AIzaSyAibvKCAI__GZScvDRzdgwGghxH60U3ZKE",
     authDomain: "train-times-9b60d.firebaseapp.com",
     databaseURL: "https://train-times-9b60d.firebaseio.com",
     projectId: "train-times-9b60d",
-    storageBucket: "",
+    storageBucket: "train-times-9b60d.appspot.com",
     messagingSenderId: "821002420057"
   };
   firebase.initializeApp(config);
+ 
 
     var database = firebase.database();
     // Capture button Click
@@ -35,10 +37,10 @@ $(document).ready(function() {
 
     // Firebase watcher + initial loader 
     database.ref().on("child_added", function (childSnapshot){
-        var newTrain= childSnapshop.val().trainName;
-        console.log(newTrain);
+        var newTrain= childSnapshot.val().trainName;
+   
         var newLocation = childSnapshot.val().destination;
-        var newFirstTrain = childSnapshop.val().firstTrain;
+        var newFirstTrain = childSnapshot.val().firstTrain;
         var newFreq = childSnapshot.val().frequency;
 
 // first Time (pushed back 1 year to make sure it comes before current time)
@@ -56,7 +58,7 @@ var tRemainder = diffTime % newFreq;
 var tMinutesTillTrain = newFreq - tRemainder;
 
 //  Next Train
-var nexTrain = moment().add(tMinutesTillTrain, "minutes");
+var nextTrain = moment().add(tMinutesTillTrain, "minutes");
 var catchTrain = moment(nextTrain).format("HH:mm");
 
 // Display on Page
